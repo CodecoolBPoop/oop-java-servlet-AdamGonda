@@ -1,0 +1,20 @@
+table, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 20px;
+}
+
+table {
+    background-color: aliceblue;
+}
+
+button {
+    font-size: 30px;
+    padding: 10px;
+
+}
+
+#chsc {
+    margin-top: 30px;
+}

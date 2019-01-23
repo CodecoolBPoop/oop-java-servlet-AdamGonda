@@ -1,0 +1,80 @@
+<html>
+<head>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 20px;
+            width:30%;
+        }
+
+        table {
+            background-color: aliceblue;
+        }
+
+        button {
+            font-size: 30px;
+            padding: 10px;
+        }
+
+        #chsc {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>Laptop</td>
+        <td>1600 USD</td>
+        <td>
+          <button data-product-id="0" class="add">Add</button>
+        </td>
+        <td>
+            <button data-product-id="0" class="remove">Remove</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Boo</td>
+        <td>500 USD</td>
+        <td>
+            <button data-product-id="1" class="add">Add</button>
+        </td>
+        <td>
+            <button data-product-id="1" class="remove">Remove</button>
+        </td>
+    </tr>
+</table>
+<button id="chsc">Checkout shopping Cart</button>
+</body>
+  <script>
+    const sendJson = type => id => {
+        fetch('http://localhost:8080/', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({type, id})
+        })
+    }
+    const mapActionTo = (btns, action) => {
+      btns.map(btn => {
+        btn.addEventListener('click', e => {
+          const id = e.target.dataset.productId
+          action(id)
+        })
+      })
+    }
+    
+    let addBtns = Array.from(document.querySelectorAll('.add'))
+    
+    let removeBtns = Array.from(document.querySelectorAll('.remove'))
+    
+    mapActionTo(addBtns, sendJson('add'))
+    mapActionTo(removeBtns, sendJson('remove'))
+    
+  </script>
+</html>
